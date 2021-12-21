@@ -1,0 +1,23 @@
+vector<int> Solution::repeatedNumber(const vector<int> &A) {
+    long long int n=A.size();
+    vector<int> ans;
+
+    long long int S=(n*(n+1))/2;
+    long long int P=(n*(n+1)*(2*n+1))/6;
+
+    long long int missing,repeating;
+
+    for(int i=0;i<A.size();i++){
+        S-=(long long int)A[i];
+        P-=(long long int)A[i]*(long long int)A[i];
+    }
+
+    missing=(S+P/S)/2;
+    repeating=missing-S;
+
+    ans.push_back(repeating);
+      ans.push_back(missing);
+
+    return ans;
+
+}
