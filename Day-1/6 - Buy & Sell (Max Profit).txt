@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int maxPro=0,minValue=INT_MAX;
+        
+        for(int price:prices){
+            minValue=min(minValue,price);
+            maxPro=max(maxPro,price-minValue);
+        }
+        
+        return maxPro;
+    }
+};

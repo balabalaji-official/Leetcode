@@ -1,0 +1,19 @@
+class Solution {
+public:
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+
+        int n1ptr=m-1,n2ptr=n-1,pos=n+m-1;
+        
+        while(n1ptr>=0 && n2ptr>=0){
+            if(nums1[n1ptr]<nums2[n2ptr]){
+                nums1[pos--]=nums2[n2ptr--];
+            }else{
+                nums1[pos--]=nums1[n1ptr--];
+            }
+        }
+        
+        while(n2ptr>=0){
+            nums1[pos--]=nums2[n2ptr--];
+        }
+    }
+};

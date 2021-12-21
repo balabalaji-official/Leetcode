@@ -1,0 +1,29 @@
+class Solution {
+public:
+    vector<vector<int>> generate(int numRows) {
+        vector<vector<int>> pascal;
+        vector<int> inner;
+        
+        for(int i=1;i<=numRows;i++){
+             inner.clear();
+             if(i==1){
+                 inner.push_back(1);
+                 pascal.push_back(inner);
+                 continue;
+             }else{
+                 int cols=i;    
+                 vector<int> prevInner=pascal[i-2];
+                 for(int j=0;j<cols;j++){
+                     if(j==0 || j==cols-1){
+                         inner.push_back(1);
+                     }else{
+                       int val=prevInner[j-1]+prevInner[j];
+                       inner.push_back(val);
+                     }
+               }
+                 pascal.push_back(inner);
+             }
+        }
+        return pascal;
+    }
+};
