@@ -1,0 +1,61 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+int merge(int *arr,int lb,int mid,int ub){
+	int i=lb,j=mid+1,k=0;
+	int arr2[ub-lb+1];
+	int count=0;
+	while(i<=mid && j<=ub){
+		if(arr[i]<=arr[j]){
+			arr2[k]=arr[i];
+			i++;
+		}else{
+			arr2[k]=arr[j];
+			j++;
+			count+=mid-i+1;
+		}
+		k++;
+	}
+	
+	while(i<=mid){
+		arr2[k++]=arr[i++];
+	}
+	
+	while(j<=ub){
+		arr2[k++]=arr[j++];
+	}
+
+    k=0;
+    for(i=lb;i<=ub;i++){
+    	arr[i]=arr2[k++];
+	}
+	return count;
+	
+}
+
+int mergeSort(int* arr,int lb,int ub){
+	int count=0;
+     if(lb<ub){
+     	int mid=(ub+lb)/2;
+     	count+=mergeSort(arr,lb,mid);
+     	count+=mergeSort(arr,mid+1,ub);
+     	count+=merge(arr,lb,mid,ub);
+	 }
+	 return count;
+}
+
+int main(){
+	
+	int n;
+	cin>>n;
+	
+	int arr[n];
+	for(int i=0;i<n;i++){
+		cin>>arr[i];
+	}
+	
+	cout<<mergeSort(arr,0,n-1)<<endl;
+	
+	return 0; 
+} 
