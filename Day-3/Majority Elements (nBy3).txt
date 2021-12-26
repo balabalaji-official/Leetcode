@@ -1,0 +1,37 @@
+class Solution {
+public:
+    vector<int> majorityElement(vector<int>& nums) {
+       int value1=INT_MAX,value2=INT_MAX,count1=0,count2=0,n=nums.size();
+        
+        for(auto num : nums){
+            
+            if(value1==num){
+                count1++;
+            }else if(value2==num){
+                count2++;
+            }else if(count1==0){
+                value1=num;
+                count1++;
+            }else if(count2==0){
+                value2=num;
+                count2++;
+            }else{
+                count1--;
+                count2--;
+            }
+        }
+        
+        vector<int> ans;
+        count1=count2=0;
+        
+        for(auto num:nums){
+            if(num==value1)count1++;
+            if(num==value2)count2++;
+        }
+        
+        if(count1>(n/3))ans.push_back(value1);
+        if(count2>(n/3))ans.push_back(value2);
+        
+        return ans;
+    }
+};
