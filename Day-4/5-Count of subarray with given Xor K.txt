@@ -1,0 +1,20 @@
+int Solution::solve(vector<int> &A, int B) {
+    int xoor=0,count=0;
+
+    unordered_map<int,int> mp;
+
+    for(auto num:A){
+        xoor=xoor^num;
+
+        if(xoor==B){
+            count++;
+        }
+
+        if(mp.find(xoor^B)!=mp.end()){
+            count+=mp[xoor^B];
+        }
+
+        mp[xoor]=mp[xoor]+1;
+    }
+    return count;
+}
