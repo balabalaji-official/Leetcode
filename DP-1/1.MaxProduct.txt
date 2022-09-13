@@ -1,0 +1,34 @@
+class Solution {
+public:
+    int maxProduct(vector<int>& nums) {
+        int lmax=nums[0],rmax=nums[0],prod=1;
+        bool zeroPresent=false;
+        
+        for(int i=0;i<nums.size();i++){
+            prod*=nums[i];
+            if(nums[i]==0){
+                prod=1;
+                zeroPresent=true;
+                continue;
+            }
+            lmax=max(lmax,prod);
+        }
+        prod=1;
+        for(int i=nums.size()-1;i>=0;i--){
+            prod*=nums[i];
+            if(nums[i]==0){
+                prod=1;
+                zeroPresent=true;
+                continue;
+            }
+            rmax=max(rmax,prod);
+            
+        }
+        
+        if(zeroPresent){
+            return max(max(lmax,rmax),0);
+        }else{
+            return max(lmax,rmax);
+        }
+    }
+};
