@@ -3,22 +3,22 @@ public:
     void nextPermutation(vector<int>& nums) {
         int n=nums.size(),k,l;
         
-        for(k=n-2;k>=0;k--){
+        for(k=n-2;k>=0;k--){ // GET the value of k (first decreasing number in reverse traversal)
             if(nums[k]<nums[k+1]){
                 break;
             }
         }
         
-        if(k<0){
+        if(k<0){  // if all elements are increasing freom reverse traversal , next permutation is reverse of it
             reverse(nums.begin(),nums.end());
         }else{
             for(l=n-1;l>k;l--){
-              if(nums[l]>nums[k]){
-                  break;
+              if(nums[l]>nums[k]){ // Find element just greater than breaking point k to set value in position k in place
+                  break;   
               }
             }
             swap(nums[k],nums[l]);
-            reverse(nums.begin()+k+1,nums.end());
+            reverse(nums.begin()+k+1,nums.end()); // reverse to get the next smaller dictionary order
         }
         
     }
